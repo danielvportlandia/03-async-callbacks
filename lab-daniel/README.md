@@ -1,0 +1,3 @@
+- The fileReader module exported from reader.js contains only 1 function, its parameters are (paths, callback), "paths" being an instance (path) from dataArray in main.js. For each dataArray instance whose typeof is equals to a string, the function outputs a string of all the content at that path, else, it throws an error and stops execution.
+
+- The main.js module has 1 function, readDataArrayAsync which has 3 parameters (dataArray, currentIndex, callback), "dataArray" being an array of paths, "currentIndex" is initially zero but increments by recursion, and the callback being txt file instance.

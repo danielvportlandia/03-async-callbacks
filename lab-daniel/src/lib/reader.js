@@ -4,17 +4,20 @@ const fs = require('fs');
 
 const fileReader = module.exports = {};
 
-fileReader.readAsync = (dataPath, characterLength, callback) => {
-  fs.readFile(
-    dataPath,
-    (error, fileBuffer) => {
-      if (error) {
-        throw error;
-      }
-      return callback(fileBuffer.toString('utf8', 0, characterLength));
-    },
-  );
+fileReader.readAsync = (paths, callback) => {
+  try {
+    fs.readFile(
+      paths,
+      (error, result) => {
+        if (typeof paths !== 'string') {
+          throw error;
+        }
+        return callback(result.toString('utf8'));
+      },
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  return undefined;
 };
-
-//need try and catch return callback(error, null)
 

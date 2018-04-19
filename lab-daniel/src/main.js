@@ -6,14 +6,10 @@ const baconPath = `${__dirname}/data/bacon.txt`;
 const hodorPath = `${__dirname}/data/hodor.txt`;
 const bobRossPath = `${__dirname}/data/bob-ross.txt`;
 
-// const file1 = process.argv[2] = baconPath;
-
-const printCharacters = (characterLength) => {
-  console.log(characterLength);
-  console.log('___________________________________________________');
+const printCharacters = (file) => {
+  console.log(file);
+  console.log('_______________________________________________________________________________________________________');
 };
-
-const characterMax = 255;
 
 const data = [bobRossPath, baconPath, hodorPath];
 
@@ -22,15 +18,10 @@ const readDataArrayAsync = (dataArray, currentIndex, callback) => {
     return callback();
   }
   const currentFilePath = dataArray[currentIndex];
-  try {
-    return fileReader.readAsync(currentFilePath, characterMax, (file) => {
-      printCharacters(file);
-      readDataArrayAsync(dataArray, currentIndex + 1, callback);
-    });
-  } catch (error) {
-    console.log(error);
-  }
-  return undefined;
+  return fileReader.readAsync(currentFilePath, (file) => {
+    printCharacters(file);
+    readDataArrayAsync(dataArray, currentIndex + 1, callback);
+  });
 };
 
 readDataArrayAsync(data, 0, () => {
